@@ -1,5 +1,11 @@
+<?php
+if (session_status() !== PHP_SESSION_ACTIVE) {
+  session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,12 +13,13 @@
   <link rel="stylesheet" href="../assets/styles.css">
   <script src="https://kit.fontawesome.com/552acac2d8.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
 
   <header class="header">
     <div class="logo">Meu CRUD</div>
     <nav class="nav" id="nav">
-    <ul>
+      <ul>
         <li><a href="../index.html">Dashboard</a></li>
         <li><a href="../cliente/criar-cliente.php">Criar Cliente</a></li>
         <li><a href="../cliente/listar-clientes.php">Listar Clientes</a></li>
@@ -27,6 +34,12 @@
   </header>
 
   <main class="main">
+    <?php
+    if (isset($_SESSION['msg'])) {
+      echo "<div class='alert'>" . $_SESSION['msg'] . "</div>";
+      unset($_SESSION['msg']);
+    }
+    ?>
     <h1>Editar Cliente</h1>
 
     <div class="form-container">
@@ -72,4 +85,5 @@
   </script>
 
 </body>
+
 </html>

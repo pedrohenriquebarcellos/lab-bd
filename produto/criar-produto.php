@@ -1,3 +1,8 @@
+<?php
+if (session_status() !== PHP_SESSION_ACTIVE) {
+  session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -30,6 +35,12 @@
   </header>
 
   <main class="main">
+    <?php
+    if (isset($_SESSION['msg'])) {
+      echo "<div class='alert'>" . $_SESSION['msg'] . "</div>";
+      unset($_SESSION['msg']);
+    }
+    ?>
     <h1>Criar Novo Produto</h1>
 
     <form action="salvar-produto.php" method="POST" class="form-container">

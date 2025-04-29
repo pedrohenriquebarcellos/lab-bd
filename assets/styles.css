@@ -249,9 +249,7 @@ body {
 }
 
 .btn-edit:hover {
-  background-color: var(
-    --secondary-color
-  );
+  background-color: #b34700
 }
 
 .btn-delete {
@@ -268,7 +266,18 @@ body {
 }
 
 .btn-delete:hover {
-  background-color: var(
-    --primary-color
-  );
+  background-color: #b34700
+}
+
+.alert {
+  background-color: #b34700;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.1rem;
+  border: 1px solid #d1d5db;
 }

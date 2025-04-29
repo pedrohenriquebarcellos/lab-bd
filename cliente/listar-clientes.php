@@ -1,3 +1,8 @@
+<?php
+if (session_status() !== PHP_SESSION_ACTIVE) {
+  session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -30,6 +35,12 @@
   </header>
 
   <main class="main">
+    <?php
+    if (isset($_SESSION['msg'])) {
+      echo "<div class='alert'>" . $_SESSION['msg'] . "</div>";
+      unset($_SESSION['msg']);
+    }
+    ?>
     <h1>Clientes Cadastrados</h1>
 
     <div class="table-container">
@@ -39,31 +50,35 @@
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
+            <th>Telefone</th>
+            <th>Ativo</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Exemplo de cliente -->
-          <tr>
-            <td>1</td>
-            <td>João Silva</td>
-            <td>joao@email.com</td>
-            <td>
-              <a href="editar-cliente.php?id=1" class="btn-edit">
-                <i class="fas fa-edit"></i> Editar
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Maria Oliveira</td>
-            <td>maria@email.com</td>
-            <td>
-              <a href="editar-cliente.php?id=2" class="btn-edit">
-                <i class="fas fa-edit"></i> Editar
-              </a>
-            </td>
-          </tr>
+        <?php
+          include(__DIR__ . '/../config/connection.php');
+
+          $query = "SELECT * FROM clientes ORDER BY data_cadastro DESC";
+          $result = mysqli_query($con, $query);
+
+          if (!$result) {
+            echo "<p>Erro ao consultar os clientes: " . mysqli_error($con) . "</p>";
+          } elseif (mysqli_num_rows($result) == 0) {
+            echo "<p>Nenhum cliente encontrado.</p>";
+          } else {
+            while ($reg = mysqli_fetch_array($result)) {
+              echo "<tr><td>" . $reg['id_clientes'] . "</td>";
+              echo "<td>" . $reg['nome'] . "</td>";
+              echo "<td>" . $reg['email'] . "</td>";
+              echo "<td>" . $reg['telefone'] . "</td>";
+              echo "<td>" . ($reg['ativo'] ? 'Sim' : 'Não') . "</td>";
+              echo "<td><a href='editar-cliente.php?id=" . $reg['id_clientes'] . "' class='btn-edit'><i class='fas fa-edit'></i> Editar</a></td></tr>";
+            }
+          }
+
+          mysqli_close($con);          
+          ?>
         </tbody>
       </table>
     </div>

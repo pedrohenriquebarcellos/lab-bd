@@ -1,3 +1,8 @@
+<?php
+if (session_status() !== PHP_SESSION_ACTIVE) {
+  session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -30,22 +35,55 @@
   </header>
 
   <main class="main">
+    <?php
+    if (isset($_SESSION['msg'])) {
+      echo "<div class='alert'>" . $_SESSION['msg'] . "</div>";
+      unset($_SESSION['msg']);
+    }
+    ?>
     <h1>Criar Novo Cliente</h1>
 
     <form action="salvar-cliente.php" method="POST" class="form-container">
       <div class="form-group">
         <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" required>
+        <input type="text" id="nome" name="nome" placeholder="Digite o nome do cliente" required>
       </div>
 
       <div class="form-group">
         <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" placeholder="Digite o e-mail do cliente" required>
+      </div>
+
+      <div class="form-group">
+        <label for="telefone">Telefone</label>
+        <input
+          onkeyup="handlePhone(event)"
+          type="text"
+          id="telefone"
+          name="telefone"
+          placeholder="Digite o telefone do cliente"
+          required
+          maxlength="15">
       </div>
 
       <button type="submit" class="btn">Salvar Cliente</button>
     </form>
   </main>
+
+  <script>
+    const handlePhone = (event) => {
+      let input = event.target
+      input.value = phoneMask(input.value)
+    }
+
+    const phoneMask = (value) => {
+      if (!value) return ""
+      value = value.replace(/\D/g, '')
+      value = value.replace(/(\d{2})(\d)/, "($1) $2")
+      value = value.replace(/(\d)(\d{4})$/, "$1-$2")
+      return value
+    }
+  </script>
 
   <script>
     const menuToggle = document.getElementById('menu-toggle');
