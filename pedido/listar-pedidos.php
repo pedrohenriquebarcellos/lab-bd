@@ -30,6 +30,10 @@
   </header>
 
   <main class="main">
+    <a href="javascript:history.back()" class="go-back">
+      <i class="fa-solid fa-arrow-left"></i>
+      <h3>Voltar</h3>
+    </a>
     <h1>Vendas Realizadas</h1>
 
     <div class="table-container">

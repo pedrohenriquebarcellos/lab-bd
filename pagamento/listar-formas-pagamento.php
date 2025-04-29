@@ -45,16 +45,14 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
       unset($_SESSION['msg']);
     }
     ?>
-    <h1>Vendedores Cadastrados</h1>
+    <h1>Formas de Pagamento Cadastradas</h1>
 
     <div class="table-container">
       <table class="responsive-table">
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nome</th>
-            <th>CPF</th>
-            <th>Telefone</th>
+            <th>Descrição</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -62,20 +60,18 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
           <?php
           include(__DIR__ . '/../config/connection.php');
 
-          $query = "SELECT * FROM vendedores ORDER BY nome ASC";
+          $query = "SELECT * FROM forma_pagamento ORDER BY id_pagamentos ASC";
           $result = mysqli_query($con, $query);
 
           if (!$result) {
-            echo "<p>Erro ao consultar os vendedores: " . mysqli_error($con) . "</p>";
+            echo "<p>Erro ao consultar as formas de pagamento: " . mysqli_error($con) . "</p>";
           } elseif (mysqli_num_rows($result) == 0) {
-            echo "<p>Nenhum vendedor encontrado.</p>";
+            echo "<p>Nenhuma forma de pagamento encontrada.</p>";
           } else {
             while ($reg = mysqli_fetch_array($result)) {
-              echo "<tr><td>" . $reg['id_vendedores'] . "</td>";
-              echo "<td>" . $reg['nome'] . "</td>";
-              echo "<td>" . $reg['cpf'] . "</td>";
-              echo "<td>" . $reg['telefone'] . "</td>";
-              echo "<td><a href='editar-vendedor.php?id=" . $reg['id_vendedores'] . "' class='btn-edit'><i class='fas fa-edit'></i> Editar</a></td></tr>";
+              echo "<tr><td>" . $reg['id_pagamentos'] . "</td>";
+              echo "<td>" . $reg['descricao'] . "</td>";
+              echo "<td><a href='editar-forma-pagamento.php?id=" . $reg['id_pagamentos'] . "' class='btn-edit'><i class='fas fa-edit'></i> Editar</a></td></tr>";
             }
           }
 

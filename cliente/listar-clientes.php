@@ -35,6 +35,10 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
   </header>
 
   <main class="main">
+    <a href="javascript:history.back()" class="go-back">
+      <i class="fa-solid fa-arrow-left"></i>
+      <h3>Voltar</h3>
+    </a>
     <?php
     if (isset($_SESSION['msg'])) {
       echo "<div class='alert'>" . $_SESSION['msg'] . "</div>";
@@ -56,7 +60,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
           </tr>
         </thead>
         <tbody>
-        <?php
+          <?php
           include(__DIR__ . '/../config/connection.php');
 
           $query = "SELECT * FROM clientes ORDER BY data_cadastro DESC";
@@ -77,7 +81,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
             }
           }
 
-          mysqli_close($con);          
+          mysqli_close($con);
           ?>
         </tbody>
       </table>

@@ -248,6 +248,24 @@ body {
   outline: none;
 }
 
+.go-back {
+  max-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  padding: 2rem;
+  gap: 1rem;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  font-size: 1rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: 600;
+}
+
 .btn {
   background-color: var(--primary-color);
   color: #ffffff;

@@ -35,6 +35,10 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     </header>
 
     <main class="main">
+        <a href="javascript:history.back()" class="go-back">
+            <i class="fa-solid fa-arrow-left"></i>
+            <h3>Voltar</h3>
+        </a>
         <?php
         if (isset($_SESSION['msg'])) {
             echo "<div class='alert'>" . $_SESSION['msg'] . "</div>";
@@ -80,16 +84,15 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
                 <div class="form-group">
                     <label for="cpf">CPF:</label>
-                    <input 
-                        type="text" 
-                        id="cpf" 
-                        name="cpf" 
-                        placeholder="CPF do Vendedor" 
-                        value="<?= $currentCPF ?? "" ?>" 
+                    <input
+                        type="text"
+                        id="cpf"
+                        name="cpf"
+                        placeholder="CPF do Vendedor"
+                        value="<?= $currentCPF ?? "" ?>"
                         required
                         onkeyup="handleCPF(event)"
-                        maxlength="14"
-                    >
+                        maxlength="14">
                 </div>
 
                 <div class="form-group">

@@ -30,6 +30,10 @@
   </header>
 
   <main class="main">
+    <a href="javascript:history.back()" class="go-back">
+      <i class="fa-solid fa-arrow-left"></i>
+      <h3>Voltar</h3>
+    </a>
     <h1>Criar Pedido</h1>
     <div class="form-container">
       <form action="processar-venda.php" method="POST" class="form">

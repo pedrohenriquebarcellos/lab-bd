@@ -35,6 +35,10 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
   </header>
 
   <main class="main">
+    <a href="javascript:history.back()" class="go-back">
+      <i class="fa-solid fa-arrow-left"></i>
+      <h3>Voltar</h3>
+    </a>
     <?php
     if (isset($_SESSION['msg'])) {
       echo "<div class='alert'>" . $_SESSION['msg'] . "</div>";
@@ -68,7 +72,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
         $currentPrice = $reg['preco_unit'];
         $currentStock = $reg['quantidade_estoque'];
       }
-      
+
       mysqli_close($con);
       ?>
       <form action="atualizar-produto.php" method="POST" class="form">
@@ -92,8 +96,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
             name="preco"
             placeholder="Preço do Produto"
             value="<?= $currentPrice ?? "" ?>"
-            required
-          >
+            required>
         </div>
 
         <div class="form-group">
