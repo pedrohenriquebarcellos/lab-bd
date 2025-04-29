@@ -43,7 +43,7 @@ include(__DIR__ . '/../config/connection.php');
     </a>
     <h1>Criar Pedido</h1>
     <div class="form-container">
-      <form action="processar-venda.php" method="POST" class="form">
+      <form action="salvar-pedido.php" method="POST" class="form">
         <div class="form-group">
           <label for="clientes">Cliente</label>
           <?php

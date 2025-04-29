@@ -1,13 +1,14 @@
 <?php
 /* Conexão na faculdade com XAMP */
-//$server = 'localhost';
+$server = 'localhost';
 /* Conexão local com Docker */
-$server = '127.0.0.1';    
-$user = 'user';
+//$server = '127.0.0.1';    
+//$user = 'user';
+$user = 'root';
 /* Conexão local com Docker*/
-$password = 'password123';
+//$password = 'password123';
 /* Conexão na faculdade com XAMP*/
-//$password = '';
+$password = '';
 $db = 'lab-bd';
 
 $con = mysqli_connect($server, $user, $password, $db);
