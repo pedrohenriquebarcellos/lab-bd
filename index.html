@@ -29,34 +29,72 @@
 
   <main class="main">
     <h1>Bem-vindo ao Sistema</h1>
-    <div class="card-container">
-      <a href="./cliente/criar-cliente.php" class="card">
-        <i class="fas fa-user-plus"></i>
-        <h2>Criar Cliente</h2>
-      </a>
-      <a href="./cliente/listar-clientes.php" class="card">
-        <i class="fas fa-users"></i>
-        <h2>Listar Clientes</h2>
-      </a>
-      <a href="./pedido/criar-pedido.php" class="card">
-        <i class="fa-solid fa-box-open"></i>
-        <h2>Criar Pedido</h2>
-      </a>
-     
-      <a href="./pedido/listar-pedidos.php" class="card">
-        <i class="fas fa-shopping-cart"></i>
-        <h2>Listar Pedidos</h2>
-      </a>
-      <a href="./produto/criar-produto.php" class="card">
-        <i class="fa-brands fa-product-hunt"></i>
-        <h2>Criar Produto</h2>
-      </a>
-      <a href="./produto/listar-produtos.php" class="card">
-        <i class="fa-solid fa-basket-shopping"></i>
-        <h2>Listar Produto</h2>
-      </a>
+    
+    <div class="card-container">      
+      <div class="group">
+        <h2>Pessoas</h2>
+        <div class="sector sector-block">          
+          <a href="./cliente/criar-cliente.php" class="card sector-card">
+            <i class="fas fa-user-plus"></i>
+            <h3>Criar Cliente</h3>
+          </a>
+          <a href="./cliente/listar-clientes.php" class="card sector-card">
+            <i class="fas fa-users"></i>
+            <h3>Listar Clientes</h3>
+          </a>
+          <a href="./vendedor/criar-vendedor.php" class="card sector-card">
+            <i class="fas fa-id-badge"></i>
+            <h3>Criar Vendedor</h3>
+          </a>
+          <a href="./vendedor/listar-vendedores.php" class="card sector-card">
+            <i class="fas fa-users"></i>
+            <h3>Listar Vendedores</h3>
+          </a>
+        </div>
+      </div>
+  
+      <div class="group">
+        <h2>Pedidos</h2>
+        <div class="sector sector-block">          
+          <a href="./pedido/criar-pedido.php" class="card sector-card">
+            <i class="fa-solid fa-box-open"></i>
+            <h3>Criar Pedido</h3>
+          </a>
+          <a href="./pedido/listar-pedidos.php" class="card sector-card">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Listar Pedidos</h3>
+          </a>
+        </div>
     </div>
-  </main>
+  
+    <div class="group">
+      <h2>Produtos</h2>
+      <div class="sector sector-block">        
+        <a href="./produto/criar-produto.php" class="card sector-card">
+          <i class="fa-brands fa-product-hunt"></i>
+          <h3>Criar Produto</h3>
+        </a>
+        <a href="./produto/listar-produtos.php" class="card sector-card">
+          <i class="fa-solid fa-basket-shopping"></i>
+          <h3>Listar Produtos</h3>
+        </a>        
+      </div>
+    </div>
+
+    <div class="group">
+      <h2>Pagamentos</h2>
+      <div class="sector sector-block">
+        <a href="./pagamento/criar-forma-pagamento.php" class="card sector-card">
+          <i class="fas fa-credit-card"></i>
+          <h3>Criar Forma de Pagamento</h3>
+        </a>
+        <a href="./pagamento/listar-formas-pagamento.php" class="card sector-card">
+          <i class="fas fa-credit-card"></i>
+          <h3>Listar Formas de Pagamento</h3>
+        </a>
+      </div>
+    </div>
+  </main>  
 
   <script>
     const menuToggle = document.getElementById('menu-toggle');
