@@ -310,7 +310,7 @@ body {
 .responsive-table td {
   padding: 1rem;
   text-align: left;
-  border-bottom: 1px solid var(--secondary-color); 
+  border-bottom: 1px solid var(--secondary-color);
   color: var(--text-color);
 }
 
@@ -320,9 +320,7 @@ body {
 }
 
 .responsive-table tr:hover {
-  background-color: var(
-    --secondary-color
-  );
+  background-color: var(--secondary-color);
 }
 
 .btn-edit {
@@ -339,7 +337,7 @@ body {
 }
 
 .btn-edit:hover {
-  background-color: #b34700
+  background-color: #b34700;
 }
 
 .btn-delete {
@@ -356,7 +354,7 @@ body {
 }
 
 .btn-delete:hover {
-  background-color: #b34700
+  background-color: #b34700;
 }
 
 .alert {
@@ -370,4 +368,28 @@ body {
   text-align: center;
   font-size: 1.1rem;
   border: 1px solid #d1d5db;
+}
+
+.add {
+  max-width: 150px;
+}
+
+.produto-item {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+.remove {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  width: 42px;
+  text-align: center;
+  background-color: #b34700;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
