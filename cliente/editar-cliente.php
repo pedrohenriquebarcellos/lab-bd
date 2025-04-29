@@ -43,37 +43,86 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     <h1>Editar Cliente</h1>
 
     <div class="form-container">
+      <?php
+      include(__DIR__ . '/../config/connection.php');
+
+      $query = "SELECT * FROM clientes WHERE id_clientes = " . $_GET['id'];
+      $result = mysqli_query($con, $query);
+
+      if (!$result) {
+        echo "<p>Erro ao consultar o cliente: " . mysqli_error($con) . "</p>";
+      } elseif (mysqli_num_rows($result) == 0) {
+        echo "<p>Nenhum cliente encontrado.</p>";
+      } else {
+        $reg = mysqli_fetch_array($result);
+
+        if ($reg['id_clientes'] != $_GET['id']) {
+          echo "<p>Cliente não encontrado.</p>";
+          exit();
+        }
+
+        $currentId = $reg['id_clientes'];
+        $currentName = $reg['nome'];
+        $currentEmail = $reg['email'];
+        $currentPhone = $reg['telefone'];
+        $currentActive = $reg['ativo'];
+      }
+      
+      mysqli_close($con);
+      ?>
       <form action="atualizar-cliente.php" method="POST" class="form">
         <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
 
         <div class="form-group">
           <label for="nome">Nome:</label>
-          <input type="text" id="nome" name="nome" placeholder="Nome do Cliente" required>
+          <input type="text" id="nome" name="nome" placeholder="Nome do Cliente" value="<?= $currentName ?? "" ?>" required>
         </div>
 
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" id="email" name="email" placeholder="Email do Cliente" required>
+          <input type="email" id="email" name="email" placeholder="Email do Cliente" value="<?= $currentEmail ?? "" ?>" required>
         </div>
 
         <div class="form-group">
           <label for="telefone">Telefone:</label>
-          <input type="text" id="telefone" name="telefone" placeholder="Telefone do Cliente" required>
+          <input
+            type="text"
+            id="telefone"
+            name="telefone"
+            placeholder="Telefone do Cliente"
+            value="<?= $currentPhone ?? "" ?>"
+            required
+            maxlength="15">
         </div>
 
-        <div class="button-group">
-          <button type="submit" class="btn-primary">
-            <i class="fas fa-save"></i> Salvar Alterações
-          </button>
-
-          <a href="remover-cliente.php?id=<?php echo $_GET['id']; ?>" class="btn-danger" onclick="return confirm('Tem certeza que deseja remover este cliente?');">
-            <i class="fas fa-trash"></i> Remover Cliente
-          </a>
+        <div class="form-group">
+          <label for="ativo">Ativo:</label>
+          <select id="ativo" name="ativo" required>
+            <option value="1" <?= $currentActive ? 'selected' : '' ?>>Sim</option>
+            <option value="0" <?= !$currentActive ? 'selected' : '' ?>>Não</option>
+          </select>
         </div>
+
+        <button type="submit" class="btn" name="acao" value="atualizar">Salvar Alterações</button>
+        <button type="submit" class="btn delete" name="acao" value="remover" onclick="return confirm('Tem certeza que deseja remover este cliente?');">Remover Cliente</button>
       </form>
     </div>
-
   </main>
+
+  <script>
+    const handlePhone = (event) => {
+      let input = event.target
+      input.value = phoneMask(input.value)
+    }
+
+    const phoneMask = (value) => {
+      if (!value) return ""
+      value = value.replace(/\D/g, '')
+      value = value.replace(/(\d{2})(\d)/, "($1) $2")
+      value = value.replace(/(\d)(\d{4})$/, "$1-$2")
+      return value
+    }
+  </script>
 
   <script>
     const menuToggle = document.getElementById('menu-toggle');
