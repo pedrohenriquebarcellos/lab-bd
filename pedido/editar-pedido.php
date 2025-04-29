@@ -21,7 +21,7 @@
         <li><a href="../pedido/criar-pedido.php">Criar Pedido</a></li>
         <li><a href="../pedido/listar-pedidos.php">Listar Pedidos</a></li>
         <li><a href="../produto/criar-produto.php">Criar Produto</a></li>
-        <li><a href="../produto/listar-produto.php">Listar Produto</a></li>
+        <li><a href="../produto/listar-produtos.php">Listar Produtos</a></li>
       </ul>
     </nav>
     <div class="menu-toggle" id="menu-toggle">

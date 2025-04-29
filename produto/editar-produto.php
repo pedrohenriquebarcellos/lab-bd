@@ -41,90 +41,71 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
       unset($_SESSION['msg']);
     }
     ?>
-    <h1>Editar Cliente</h1>
+    <h1>Editar Produto</h1>
 
     <div class="form-container">
       <?php
       include(__DIR__ . '/../config/connection.php');
 
-      $query = "SELECT * FROM clientes WHERE id_clientes = " . $_GET['id'];
+      $query = "SELECT * FROM produtos WHERE id_produtos = " . $_GET['id'];
       $result = mysqli_query($con, $query);
 
       if (!$result) {
-        echo "<p>Erro ao consultar o cliente: " . mysqli_error($con) . "</p>";
+        echo "<p>Erro ao consultar o produto: " . mysqli_error($con) . "</p>";
       } elseif (mysqli_num_rows($result) == 0) {
-        echo "<p>Nenhum cliente encontrado.</p>";
+        echo "<p>Nenhum produto encontrado.</p>";
       } else {
         $reg = mysqli_fetch_array($result);
 
-        if ($reg['id_clientes'] != $_GET['id']) {
-          echo "<p>Cliente não encontrado.</p>";
+        if ($reg['id_produtos'] != $_GET['id']) {
+          echo "<p>Produto não encontrado.</p>";
           exit();
         }
 
-        $currentId = $reg['id_clientes'];
+        $currentId = $reg['id_produtos'];
         $currentName = $reg['nome'];
-        $currentEmail = $reg['email'];
-        $currentPhone = $reg['telefone'];
-        $currentActive = $reg['ativo'];
+        $currentDescription = $reg['descricao'];
+        $currentPrice = $reg['preco_unit'];
+        $currentStock = $reg['quantidade_estoque'];
       }
-
+      
       mysqli_close($con);
       ?>
-      <form action="atualizar-cliente.php" method="POST" class="form">
+      <form action="atualizar-produto.php" method="POST" class="form">
         <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
 
         <div class="form-group">
           <label for="nome">Nome:</label>
-          <input type="text" id="nome" name="nome" placeholder="Nome do Cliente" value="<?= $currentName ?? "" ?>" required>
+          <input type="text" id="nome" name="nome" placeholder="Nome do Produto" value="<?= $currentName ?? "" ?>" required>
         </div>
 
         <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" placeholder="Email do Cliente" value="<?= $currentEmail ?? "" ?>" required>
+          <label for="descricao">Descrição:</label>
+          <input type="text" id="descricao" name="descricao" placeholder="Descrição do Produto" value="<?= $currentDescription ?? "" ?>" required>
         </div>
 
         <div class="form-group">
-          <label for="telefone">Telefone:</label>
+          <label for="preco">Preço:</label>
           <input
-            onkeyup="handlePhone(event)"
             type="text"
-            id="telefone"
-            name="telefone"
-            placeholder="Telefone do Cliente"
-            value="<?= $currentPhone ?? "" ?>"
+            id="preco"
+            name="preco"
+            placeholder="Preço do Produto"
+            value="<?= $currentPrice ?? "" ?>"
             required
-            maxlength="15">
+          >
         </div>
 
         <div class="form-group">
-          <label for="ativo">Ativo:</label>
-          <select id="ativo" name="ativo" required>
-            <option value="1" <?= $currentActive ? 'selected' : '' ?>>Sim</option>
-            <option value="0" <?= !$currentActive ? 'selected' : '' ?>>Não</option>
-          </select>
+          <label for="quantidade_estoque">Quantidade em Estoque:</label>
+          <input type="text" id="quantidade_estoque" name="quantidade_estoque" placeholder="Quantidade em Estoque" value="<?= $currentStock ?? "" ?>" required>
         </div>
 
         <button type="submit" class="btn" name="acao" value="atualizar">Salvar Alterações</button>
-        <button type="submit" class="btn delete" name="acao" value="remover" onclick="return confirm('Tem certeza que deseja remover este cliente?');">Remover Cliente</button>
+        <button type="submit" class="btn delete" name="acao" value="remover" onclick="return confirm('Tem certeza que deseja remover este cliente?');">Remover Produto</button>
       </form>
     </div>
   </main>
-
-  <script>
-    const handlePhone = (event) => {
-      let input = event.target
-      input.value = phoneMask(input.value)
-    }
-
-    const phoneMask = (value) => {
-      if (!value) return ""
-      value = value.replace(/\D/g, '')
-      value = value.replace(/(\d{2})(\d)/, "($1) $2")
-      value = value.replace(/(\d)(\d{4})$/, "$1-$2")
-      return value
-    }
-  </script>
 
   <script>
     const menuToggle = document.getElementById('menu-toggle');

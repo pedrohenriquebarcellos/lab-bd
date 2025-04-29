@@ -26,7 +26,7 @@ if (!$result) {
 
 if (mysqli_insert_id($con)) {
     $_SESSION['msg'] = '<span>Produto cadastrado com sucesso</span>';
-    header("Location: listar-produto.php");
+    header("Location: listar-produtos.php");
     exit();
 } else {
     $_SESSION['msg'] = '<span>Não foi possível cadastrar o produto</span>';
