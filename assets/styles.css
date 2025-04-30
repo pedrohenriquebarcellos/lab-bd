@@ -207,6 +207,7 @@ body {
   }
 }
 
+.form-status,
 .form-container {
   background-color: var(--card-background);
   padding: 2rem;
@@ -334,6 +335,14 @@ body {
   text-decoration: none;
   font-size: 0.9rem;
   transition: background 0.3s;
+}
+
+.title {
+  margin: 3rem 0;
+}
+
+.reset {
+  padding: 1rem !important;
 }
 
 .btn-edit:hover {

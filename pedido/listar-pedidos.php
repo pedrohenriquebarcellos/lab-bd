@@ -34,7 +34,13 @@
       <i class="fa-solid fa-arrow-left"></i>
       <h3>Voltar</h3>
     </a>
-    <h1>Vendas Realizadas</h1>
+    <?php
+    if (isset($_SESSION['msg'])) {
+      echo "<div class='alert'>" . $_SESSION['msg'] . "</div>";
+      unset($_SESSION['msg']);
+    }
+    ?>
+    <h1>Pedidos Realizados</h1>
 
     <div class="table-container">
       <table class="responsive-table">
@@ -42,35 +48,47 @@
           <tr>
             <th data-label="ID">ID</th>
             <th data-label="Nome">Cliente</th>
-            <th>Data</th>
-            <th>Valor</th>
+            <th>Vendedor</th>
+            <th>Total</th>
+            <th>Forma de Pagamento</th>
+            <th>Status</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Exemplo de venda -->
-          <tr>
-            <td>1</td>
-            <td>João Silva</td>
-            <td>28/04/2025</td>
-            <td>R$ 250,00</td>
-            <td>
-              <a href="editar-pedido.php?id=1" class="btn-edit">
-                <i class="fas fa-edit"></i> Editar
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Maria Oliveira</td>
-            <td>27/04/2025</td>
-            <td>R$ 120,00</td>
-            <td>
-              <a href="editar-pedido.php?id=2" class="btn-edit">
-                <i class="fas fa-edit"></i> Editar
-              </a>
-            </td>
-          </tr>
+          <?php
+          include(__DIR__ . '/../config/connection.php');
+
+          $query = "
+            SELECT ped.id_pedidos, cli.nome AS nome_cliente, ven.nome AS nome_vendedor, 
+            fp.descricao AS forma_pagamento, ped.valor_total, ped.status_pedido
+            FROM pedidos ped
+            JOIN clientes cli ON ped.id_cliente = cli.id_clientes
+            JOIN vendedores ven ON ped.id_vendedor = ven.id_vendedores
+            JOIN forma_pagamento fp ON ped.id_forma_pagamento = fp.id_pagamentos
+            ORDER BY ped.id_pedidos DESC;
+          ";
+
+          $result = mysqli_query($con, $query);
+
+          if (!$result) {
+            echo "<p>Erro ao consultar os pedidos: " . mysqli_error($con) . "</p>";
+          } elseif (mysqli_num_rows($result) == 0) {
+            echo "<p>Nenhum pedido encontrado.</p>";
+          } else {
+            while ($reg = mysqli_fetch_array($result)) {
+              echo "<tr><td>" . $reg['id_pedidos'] . "</td>";
+              echo "<td>" . $reg['nome_cliente'] . "</td>";
+              echo "<td>" . $reg['nome_vendedor'] . "</td>";
+              echo "<td>R$" . number_format($reg['valor_total'], 2, ',', '.') . "</td>";
+              echo "<td>" . $reg['forma_pagamento'] . "</td>";
+              echo "<td>" . $reg['status_pedido'] . "</td>";
+              echo "<td><a href='editar-pedido.php?id=" . $reg['id_pedidos'] . "' class='btn-edit'><i class='fas fa-edit'></i> Editar</a></td></tr>";
+            }
+          }
+
+          mysqli_close($con);
+          ?>
         </tbody>
       </table>
     </div>

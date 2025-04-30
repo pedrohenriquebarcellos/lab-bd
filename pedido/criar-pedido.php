@@ -41,9 +41,15 @@ include(__DIR__ . '/../config/connection.php');
       <i class="fa-solid fa-arrow-left"></i>
       <h3>Voltar</h3>
     </a>
+    <?php
+    if (isset($_SESSION['msg'])) {
+      echo "<div class='alert'>" . $_SESSION['msg'] . "</div>";
+      unset($_SESSION['msg']);
+    }
+    ?>
     <h1>Criar Pedido</h1>
     <div class="form-container">
-      <form action="salvar-pedido.php" method="POST" class="form">
+      <form action="salvar-pedido.php" method="POST" class="form-status">
         <div class="form-group">
           <label for="clientes">Cliente</label>
           <?php
@@ -70,7 +76,7 @@ include(__DIR__ . '/../config/connection.php');
             <div class="produto-item">
               <button type="button" class="btn remove" onclick="removerProduto(this)">x</button>
               <label>Produto 1</label>
-              <select name="produtos_id[0]" class="produto-select" required>
+              <select name="produto_id[0]" class="produto-select" required>
                 <?php
                 $queryProdutos = "SELECT * FROM produtos";
                 $resultProdutos = mysqli_query($con, $queryProdutos);
@@ -87,7 +93,7 @@ include(__DIR__ . '/../config/connection.php');
               <input type="number" class="preco-unit" readonly>
 
               <label>Total do Produto</label>
-              <input type="number" class="valor-total" readonly>              
+              <input type="number" class="valor-total" readonly>
             </div>
           </div>
 
@@ -143,6 +149,7 @@ include(__DIR__ . '/../config/connection.php');
         </div>
 
         <button type="submit" class="btn">Salvar Pedido</button>
+        <button type="button" class="btn btn-edit reset" onclick="resetarFormulario()">Resetar</button>
       </form>
     </div>
   </main>
@@ -230,6 +237,29 @@ include(__DIR__ . '/../config/connection.php');
       } else {
         alert("É necessário ter pelo menos um produto no pedido.");
       }
+    }
+
+    function resetarFormulario() {
+      const form = document.querySelector('.form');
+      form.reset();
+
+      const produtosContainer = document.getElementById('produtos-container');
+      const produtoItems = produtosContainer.querySelectorAll('.produto-item');
+
+      for (let i = 1; i < produtoItems.length; i++) {
+        produtoItems[i].remove();
+      }
+
+      const primeiroProduto = produtoItems[0];
+      const quantidadeInput = primeiroProduto.querySelector('.quantidade');
+      const precoUnitInput = primeiroProduto.querySelector('.preco-unit');
+      const valorTotalInput = primeiroProduto.querySelector('.valor-total');
+
+      quantidadeInput.value = '';
+      precoUnitInput.value = '';
+      valorTotalInput.value = '';
+
+      atualizarValorTotalGeral();
     }
 
     document.querySelectorAll('.produto-item').forEach(atualizarCampos);
