@@ -20,10 +20,10 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     <div class="logo">Meu CRUD</div>
     <nav class="nav" id="nav">
       <ul>
-        <li><a href="../index.html">Dashboard</a></li>
+        <li><a href="index.html">Dashboard</a></li>
         <li><a href="../cliente/criar-cliente.php">Criar Cliente</a></li>
-        <li><a href="../cliente/criar-pedido.php">Criar Pedido</a></li>
-        <li><a href="../pedido/listar-clientes.php">Listar Clientes</a></li>
+        <li><a href="../cliente/listar-clientes.php">Listar Clientes</a></li>
+        <li><a href="../pedido/criar-pedido.php">Criar Pedido</a></li>
         <li><a href="../pedido/listar-pedidos.php">Listar Pedidos</a></li>
         <li><a href="../produto/criar-produto.php">Criar Produto</a></li>
         <li><a href="../produto/listar-produtos.php">Listar Produtos</a></li>
