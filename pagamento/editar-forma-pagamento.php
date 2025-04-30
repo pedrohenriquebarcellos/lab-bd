@@ -35,7 +35,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     </header>
 
     <main class="main">
-        <a href="javascript:history.back()" class="go-back">
+        <a href="./listar-formas-pagamento.php" class="go-back">
             <i class="fa-solid fa-arrow-left"></i>
             <h3>Voltar</h3>
         </a>
@@ -45,10 +45,6 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
             unset($_SESSION['msg']);
         }
         ?>
-
-        <div class="form-group">
-            <a href="../index.html" class="btn">Voltar</a>
-        </div>
         <h1>Editar Formas de Pagamento</h1>
 
         <div class="form-container">

@@ -40,7 +40,7 @@ include(__DIR__ . '/../config/connection.php');
   </header>
 
   <main class="main">
-    <a href="javascript:history.back()" class="go-back">
+    <a href="./listar-pedidos.php" class="go-back">
       <i class="fa-solid fa-arrow-left"></i>
       <h3>Voltar</h3>
     </a>

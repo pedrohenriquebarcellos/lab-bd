@@ -34,7 +34,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
   </header>
 
   <main class="main">
-    <a href="javascript:history.back()" class="go-back">
+    <a href="../index.html" class="go-back">
       <i class="fa-solid fa-arrow-left"></i>
       <h3>Voltar</h3>
     </a>
