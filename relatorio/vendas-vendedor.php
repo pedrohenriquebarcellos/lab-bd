@@ -76,7 +76,7 @@ if (!$result) {
     </header>
 
     <main class="main">
-        <a href="../pedido/pesquisar-pedidos.php" class="go-back">
+        <a href="../index.html" class="go-back">
             <i class="fa-solid fa-arrow-left"></i>
             <h3>Voltar</h3>
         </a>
