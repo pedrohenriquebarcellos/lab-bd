@@ -6,6 +6,11 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 include(__DIR__ . '/../config/connection.php');
 global $con;
 
+$vendedorSelecionado = isset($_POST['vendedor']) ? $_POST['vendedor'] : null;
+
+$vendedoresQuery = "SELECT id_vendedores, nome FROM vendedores ORDER BY nome ASC";
+$vendedoresResult = mysqli_query($con, $vendedoresQuery);
+
 $query = "
     SELECT
         v.nome AS vendedor,
@@ -17,6 +22,13 @@ $query = "
         vendedores v ON v.id_vendedores = p.id_vendedor
     JOIN
         itens_pedido ip ON ip.id_pedido = p.id_pedidos
+";
+
+if ($vendedorSelecionado) {
+    $query .= " WHERE v.id_vendedores = " . (int)$vendedorSelecionado;
+}
+
+$query .= "
     GROUP BY
         v.id_vendedores
     ORDER BY
@@ -75,6 +87,21 @@ if (!$result) {
         }
         ?>
         <h1>Desempenho dos Vendedores</h1>
+
+        <form method="POST" action="">
+            <div class="form-group">
+                <label for="vendedor">Filtrar por Vendedor:</label>
+                <select name="vendedor" id="vendedor">
+                    <option value="">Todos</option>
+                    <?php while ($vendedor = mysqli_fetch_assoc($vendedoresResult)) : ?>
+                        <option value="<?= $vendedor['id_vendedores']; ?>" <?= $vendedor['id_vendedores'] == $vendedorSelecionado ? 'selected' : ''; ?>>
+                            <?= $vendedor['nome']; ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
+            <button type="submit" class="btn">Filtrar</button>
+        </form>
 
         <div class="table-container">
             <table class="responsive-table">
