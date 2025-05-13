@@ -60,7 +60,7 @@ if ($initialDate && $finalDate) {
     </header>
 
     <main class="main">
-        <a href="../pedido/pesquisar-pedidos.php" class="go-back">
+        <a href="../geral/venda-data.php" class="go-back">
             <i class="fa-solid fa-arrow-left"></i>
             <h3>Voltar</h3>
         </a>
@@ -107,15 +107,17 @@ if ($initialDate && $finalDate) {
                     mysqli_close($con);
                     ?>
                 </tbody>
-            </table>
-
-            <?php if ($initialDate && $finalDate && $totalVendas > 0): ?>
-                <div class="totals">
-                    <h2>Total de vendas entre <?= date('d/m/Y', strtotime($initialDate)) ?> e <?= date('d/m/Y', strtotime($finalDate)) ?>:</h2>
-                    <p><strong>R$ <?= number_format($totalVendas, 2, ',', '.') ?></strong></p>
-                </div>
-            <?php endif; ?>
+            </table> 
         </div>
+        <?php if ($initialDate && $finalDate && $totalVendas > 0): ?>
+            <div class="totals">
+                <h2>Total de vendas entre <?= date('d/m/Y', strtotime($initialDate)) ?> e <?= date('d/m/Y', strtotime($finalDate)) ?>:</h2>
+                <p><strong>R$ <?= number_format($totalVendas, 2, ',', '.') ?></strong></p>
+                <form action="data-pdf.php" method="POST">
+                    <button type="submit" class="btn"><i class="fas fa-print"></i> Exportar PDF</button>
+                </form>                
+            </div>
+        <?php endif; ?>
     </main>
 
     <script>

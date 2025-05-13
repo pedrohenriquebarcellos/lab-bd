@@ -1,4 +1,5 @@
 <?php
+
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
@@ -11,6 +12,11 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 
 $vendedorSelecionado = isset($_POST['vendedor']) ? $_POST['vendedor'] : null;
+
+if (!$vendedorSelecionado) {
+    header("Location: vendas-vendedor.php");
+    exit();
+}
 
 $vendedoresQuery = "SELECT id_vendedores, nome FROM vendedores ORDER BY nome ASC";
 $vendedoresResult = mysqli_query($con, $vendedoresQuery);
@@ -75,7 +81,7 @@ $html = '
         <tbody>';
         
         if (mysqli_num_rows($result) == 0) {
-            $html .= "<tr><td colspan='3' style='text-align: center;'>Nenhum vendedor encontrado.</td></tr>";
+            $html .= "<tr><td colspan='3' style='text-align: center;'>Nenhuma venda encontrada.</td></tr>";
         } else {
             while ($row = mysqli_fetch_assoc($result)) {
                 $html .= "<tr>
@@ -96,18 +102,10 @@ $options->set('isHtml5ParserEnabled', true);
 $options->set('isPhpEnabled', true);
 
 $dompdf = new Dompdf($options);
-
-// Carregar o HTML para o DomPDF
 $dompdf->loadHtml($html);
-
-// Definir o tamanho do papel
-$dompdf->setPaper('A4', 'portrait');  // Use 'landscape' para orientação horizontal
-
-// Renderizar o PDF (gerar)
+$dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
-
-// Enviar o arquivo PDF para o navegador
-$dompdf->stream("relatorio_vendedores.pdf", array("Attachment" => 0));  // 0 para exibir no navegador, 1 para download
+$dompdf->stream("relatorio_vendedores.pdf", array("Attachment" => 0));
 
 mysqli_close($con);
 exit();

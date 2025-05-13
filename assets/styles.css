@@ -139,6 +139,22 @@ body {
   color: var(--primary-color);
 }
 
+.totals {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 3rem auto;
+  max-width: 600px;
+  width: 100%;
+  background-color: var(--card-background);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  text-decoration: none;
+  color: var(--text-color);
+  transition: transform 0.3s, background-color 0.3s;
+}
+
 .sector-card {
   background-color: var(--card-background);
   padding: 2rem;
@@ -150,6 +166,7 @@ body {
   transition: transform 0.3s, background-color 0.3s;
 }
 
+.totals:hover,
 .sector-card:hover {
   background-color: var(--primary-color);
   color: #fff;

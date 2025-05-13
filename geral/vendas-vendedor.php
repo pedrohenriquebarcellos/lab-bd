@@ -101,7 +101,7 @@ if (!$result) {
                 </select>
             </div>
             <button type="submit" class="btn">Filtrar</button>
-        </form>
+        </form>        
 
         <div class="table-container">
             <table class="responsive-table">
@@ -115,7 +115,7 @@ if (!$result) {
                 <tbody>
                     <?php
                     if (mysqli_num_rows($result) == 0) {
-                        echo "<tr><td colspan='3' style='text-align: center;'>Nenhum vendedor encontrado.</td></tr>";
+                        echo "<tr><td colspan='3' style='text-align: center;'>Nenhuma venda encontrada.</td></tr>";
                     } else {
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "<tr>
@@ -130,6 +130,13 @@ if (!$result) {
                 </tbody>
             </table>
         </div>
+
+        <?php if ($vendedorSelecionado): ?>
+            <form method="POST" action="vendas-pdf.php" target="_blank" style="margin-top: 1rem;">
+                <input type="hidden" name="vendedor" value="<?= htmlspecialchars($vendedorSelecionado) ?>">
+                <button type="submit" class="btn">Gerar Relatório PDF</button>
+            </form>
+        <?php endif; ?>
     </main>
 
     <script>
