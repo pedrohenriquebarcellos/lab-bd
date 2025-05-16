@@ -11,12 +11,13 @@ $finalDate = $_POST['data-final'] ?? null;
 $queryResult = null;
 
 if ($initialDate && $finalDate) {
+    $finalDate = date('Y-m-d 23:59:59', strtotime($finalDate));
 
     $query = "
         SELECT id_pedidos, valor_total, status_pedido, fp.descricao FROM pedidos p 
         JOIN vendedores v ON v.id_vendedores = p.id_vendedor
         JOIN forma_pagamento fp ON fp.id_pagamentos = p.id_forma_pagamento
-        WHERE p.data_pedido BETWEEN '$initialDate' AND '$finalDate'
+        WHERE p.data_pedido BETWEEN '$initialDate' AND '$finalDate' AND status_pedido != 'cancelado'
         ORDER BY id_pedidos ASC;
     ";
 
@@ -85,14 +86,13 @@ if ($initialDate && $finalDate) {
                 </thead>
                 <tbody>
                     <?php
+                    $totalVendas = 0;
 
                     if (!$queryResult) {
                         echo "<tr><td colspan='5' style='text-align: center;>Erro ao buscar os pedidos.</td></tr>";
                     } elseif (mysqli_num_rows($queryResult) == 0) {
                         echo "<tr><td colspan='5' style='text-align: center;'>Nenhum pedido encontrado.</td></tr>";
                     } else {
-                        $totalVendas = 0;
-
                         while ($reg = mysqli_fetch_array($queryResult)) {
                             $totalVendas += $reg['valor_total'];
 
@@ -114,6 +114,8 @@ if ($initialDate && $finalDate) {
                 <h2>Total de vendas entre <?= date('d/m/Y', strtotime($initialDate)) ?> e <?= date('d/m/Y', strtotime($finalDate)) ?>:</h2>
                 <p><strong>R$ <?= number_format($totalVendas, 2, ',', '.') ?></strong></p>
                 <form action="data-pdf.php" method="POST">
+                    <input type="hidden" name="data-inicial" value="<?= htmlspecialchars($initialDate) ?>">
+                    <input type="hidden" name="data-final" value="<?= htmlspecialchars($finalDate) ?>">
                     <button type="submit" class="btn"><i class="fas fa-print"></i> Exportar PDF</button>
                 </form>                
             </div>
