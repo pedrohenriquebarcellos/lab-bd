@@ -24,18 +24,18 @@ $vendedoresResult = mysqli_query($con, $vendedoresQuery);
 $query = "
     SELECT
         v.nome AS vendedor,
-        COUNT(DISTINCT ip.id_produto) AS total_itens_diferentes,
-        SUM(ip.quantidade * ip.preco_unit) AS total_vendas
+        COUNT(DISTINCT p.id_pedidos) AS total_pedidos_diferentes,
+        SUM(p.valor_total) AS total_vendas
     FROM
         pedidos p
     JOIN
         vendedores v ON v.id_vendedores = p.id_vendedor
-    JOIN
-        itens_pedido ip ON ip.id_pedido = p.id_pedidos
+    WHERE
+        (p.status_pedido = 'ativo' OR p.status_pedido = 'cancelado')
 ";
 
 if ($vendedorSelecionado) {
-    $query .= " WHERE v.id_vendedores = " . (int)$vendedorSelecionado;
+    $query .= " AND v.id_vendedores = " . (int)$vendedorSelecionado;
 }
 
 $query .= "
@@ -86,7 +86,7 @@ $html = '
             while ($row = mysqli_fetch_assoc($result)) {
                 $html .= "<tr>
                             <td>{$row['vendedor']}</td>
-                            <td>{$row['total_itens_diferentes']}</td>
+                            <td>{$row['total_pedidos_diferentes']}</td>
                             <td>R$ " . number_format($row['total_vendas'], 2, ',', '.') . "</td>
                           </tr>";
             }
