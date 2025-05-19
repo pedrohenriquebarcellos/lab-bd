@@ -74,7 +74,7 @@ $html = '
         <thead>
             <tr>
                 <th>Vendedor</th>
-                <th>Total de Itens Diferentes</th>
+                <th>Total de vendas Diferentes</th>
                 <th>Total de Vendas (R$)</th>
             </tr>
         </thead>

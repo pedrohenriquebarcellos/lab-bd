@@ -108,7 +108,7 @@ if (!$result) {
                 <thead>
                     <tr>
                         <th>Vendedor</th>
-                        <th>Total de Itens Diferentes</th>
+                        <th>Total de Vendas Diferentes</th>
                         <th>Total de Vendas (R$)</th>
                     </tr>
                 </thead>

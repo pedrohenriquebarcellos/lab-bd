@@ -48,7 +48,7 @@ $queryTotal = "
     JOIN
         itens_pedido ip ON ip.id_pedido = p.id_pedidos
     WHERE
-        p.data_pedido BETWEEN '$initialDate' AND '$finalDate' A;
+        p.data_pedido BETWEEN '$initialDate' AND '$finalDate';
 ";
 
 $resultVendedores = mysqli_query($con, $queryVendedores);

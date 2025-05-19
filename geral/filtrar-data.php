@@ -11,6 +11,7 @@ $finalDate = $_POST['data-final'] ?? null;
 $queryResult = null;
 
 if ($initialDate && $finalDate) {
+    $_SESSION['msg'] = null;
     $finalDate = date('Y-m-d 23:59:59', strtotime($finalDate));
 
     $query = "
