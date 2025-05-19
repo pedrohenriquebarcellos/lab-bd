@@ -12,7 +12,7 @@
 <body>
 
   <header class="header">
-    <div class="logo">Meu CRUD</div>
+    <div class="logo">Projeto LAB-BD</div>
     <nav class="nav" id="nav">
       <ul>
         <li><a href="../index.html">Dashboard</a></li>

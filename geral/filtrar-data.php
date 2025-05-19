@@ -44,7 +44,7 @@ if ($initialDate && $finalDate) {
 <body>
 
     <header class="header">
-        <div class="logo">Meu CRUD</div>
+        <div class="logo">Projeto LAB-BDD</div>
         <nav class="nav" id="nav">
             <ul>
                 <li><a href="../index.html">Dashboard</a></li>
