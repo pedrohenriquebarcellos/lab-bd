@@ -94,7 +94,12 @@ VALUES
   ('Carla Borges', 'carla.borges@gmail.com', '11987776655', NOW(), TRUE),
   ('Juliano Rocha', 'juliano.rocha@gmail.com', '11980008877', NOW(), TRUE),
   ('Amanda Ribeiro', 'amanda.ribeiro@gmail.com', '11982223344', NOW(), TRUE),
-  ('Gustavo Martins', 'gustavo.martins@gmail.com', '11983334455', NOW(), TRUE);
+  ('Gustavo Martins', 'gustavo.martins@gmail.com', '11983334455', NOW(), TRUE),
+  ('Tiago Almeida', 'tiago.almeida@gmail.com', '11990003322', NOW(), TRUE),
+  ('Vanessa Rocha', 'vanessa.rocha@gmail.com', '11987774466', NOW(), TRUE),
+  ('Daniela Souza', 'daniela.souza@gmail.com', '11983332211', NOW(), TRUE),
+  ('Felipe Araújo', 'felipe.araujo@gmail.com', '11981110099', NOW(), TRUE),
+  ('Isabela Nogueira', 'isabela.nogueira@gmail.com', '11982225511', NOW(), TRUE);
  
 INSERT INTO forma_pagamento (descricao) 
 VALUES
@@ -115,7 +120,12 @@ VALUES
   ('Ana Oliveira', '234.567.890-11', '(21) 98765-4321'),
   ('João Pereira', '345.678.901-22', '(31) 99876-5432'),
   ('Mariana Souza', '456.789.012-33', '(41) 98765-1234'),
-  ('Lucas Andrade', '567.890.123-44', '(51) 97654-3210');
+  ('Lucas Andrade', '567.890.123-44', '(51) 97654-3210'),
+  ('Fernanda Lima', '678.901.234-55', '(61) 91234-7890'),
+  ('Thiago Nunes', '789.012.345-66', '(62) 98765-4322'),
+  ('Patrícia Moura', '890.123.456-77', '(63) 99876-5433'),
+  ('Eduardo Cunha', '901.234.567-88', '(64) 98765-1235'),
+  ('Juliana Teixeira', '012.345.678-99', '(65) 97654-3211');
 
 INSERT INTO pedidos (id_cliente, id_forma_pagamento, data_pedido, valor_total, status_pedido, id_vendedor) 
 VALUES
@@ -128,7 +138,12 @@ VALUES
   (7, 1, NOW(), 33.47, 'ativo',2),
   (8, 2, NOW(), 62.90, 'ativo',3),
   (9, 4, NOW(), 44.20, 'ativo',4),
-  (10, 6, NOW(), 19.90, 'cancelado',5);
+  (10, 6, NOW(), 19.90, 'cancelado',5),
+  (11, 1, NOW(), 42.40, 'ativo', 6),
+  (12, 4, NOW(), 27.80, 'ativo', 7),
+  (13, 3, NOW(), 39.80, 'ativo', 8),
+  (14, 2, NOW(), 56.70, 'ativo', 9),
+  (15, 5, NOW(), 19.98, 'ativo', 10);
 
 INSERT INTO itens_pedido (id_pedido, id_produto, quantidade, preco_unit) 
 VALUES
@@ -141,7 +156,16 @@ VALUES
   (4, 1, 2, 2.99),
   (5, 5, 2, 8.99),
   (6, 2, 3, 19.90),
-  (6, 6, 1, 7.50);
+  (6, 6, 1, 7.50),
+  (11, 1, 2, 2.99),
+  (11, 8, 4, 6.99),
+  (12, 4, 2, 4.75),
+  (12, 10, 2, 3.99),
+  (13, 5, 2, 8.99),
+  (13, 6, 3, 7.50),
+  (14, 2, 2, 19.90),
+  (14, 3, 2, 6.50),
+  (15, 9, 2, 10.00);
 ```
 
 

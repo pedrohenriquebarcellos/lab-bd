@@ -114,7 +114,7 @@ if ($initialDate && $finalDate) {
             <div class="totals">
                 <h2>Total de vendas entre <?= date('d/m/Y', strtotime($initialDate)) ?> e <?= date('d/m/Y', strtotime($finalDate)) ?>:</h2>
                 <p><strong>R$ <?= number_format($totalVendas, 2, ',', '.') ?></strong></p>
-                <form action="data-pdf.php" method="POST">
+                <form action="data-pdf.php" method="POST" target="_blank">
                     <input type="hidden" name="data-inicial" value="<?= htmlspecialchars($initialDate) ?>">
                     <input type="hidden" name="data-final" value="<?= htmlspecialchars($finalDate) ?>">
                     <button type="submit" class="btn"><i class="fas fa-print"></i> Exportar PDF</button>
